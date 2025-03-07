@@ -1,0 +1,58 @@
+Understanding Merge Sort (Step-by-Step)
+
+Merge Sort is a divide and conquer algorithm. It works in three steps:
+	1.	Divide: Split the array into two halves.
+	2.	Conquer: Recursively sort each half.
+	3.	Merge: Combine the sorted halves into a single sorted array.
+
+Example: Sorting [6, 3, 8, 5, 2, 7, 4, 1]
+	1.	Divide:
+	•	[6, 3, 8, 5] and [2, 7, 4, 1]
+	•	Keep splitting until single elements: [6], [3], [8], [5], [2], [7], [4], [1]
+	2.	Conquer:
+	•	Merge [6] and [3] → [3, 6]
+	•	Merge [8] and [5] → [5, 8]
+	•	Merge [2] and [7] → [2, 7]
+	•	Merge [4] and [1] → [1, 4]
+	3.	Merge Again:
+	•	Merge [3, 6] and [5, 8] → [3, 5, 6, 8]
+	•	Merge [2, 7] and [1, 4] → [1, 2, 4, 7]
+	4.	Final Merge:
+	•	Merge [3, 5, 6, 8] and [1, 2, 4, 7] → [1, 2, 3, 4, 5, 6, 7, 8]
+
+Code Implementation in Python
+
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    mid = len(arr) // 2
+    left_half = merge_sort(arr[:mid])
+    right_half = merge_sort(arr[mid:])
+
+    return merge(left_half, right_half)
+
+def merge(left, right):
+    sorted_arr = []
+    i = j = 0
+
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            sorted_arr.append(left[i])
+            i += 1
+        else:
+            sorted_arr.append(right[j])
+            j += 1
+
+    sorted_arr.extend(left[i:])
+    sorted_arr.extend(right[j:])
+
+    return sorted_arr
+
+# Example
+arr = [6, 3, 8, 5, 2, 7, 4, 1]
+print(merge_sort(arr))Why Use Merge Sort?
+
+✅ Time Complexity: O(n log n) (faster than Bubble Sort, Selection Sort)
+✅ Stable Sort: Maintains order of equal elements
+✅ Works Well for Large Datasets
