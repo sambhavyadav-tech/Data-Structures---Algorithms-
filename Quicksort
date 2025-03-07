@@ -1,0 +1,49 @@
+Understanding *QuickSort*
+
+QuickSort is another divide and conquer algorithm, similar to Merge Sort but more efficient in many cases. It works by selecting a pivot element and then rearranging the array so that:
+	•	Elements smaller than the pivot go to the left.
+	•	Elements larger than the pivot go to the right.
+	•	The pivot is placed in its correct position.
+
+After partitioning, the left and right parts are sorted recursively.
+
+⸻
+
+Step-by-Step Example
+
+Let’s sort [8, 3, 6, 1, 7, 2, 5] using QuickSort.
+	1.	Choose a Pivot (e.g., last element → 5)
+	•	Partition the array so that:
+[3, 1, 2] (smaller) [5] (pivot) [8, 6, 7] (larger)
+	2.	Recursively Sort Left ([3, 1, 2]) and Right ([8, 6, 7])
+	•	Choose pivot 2 for [3, 1, 2]: [1] [2] [3] (sorted)
+	•	Choose pivot 7 for [8, 6, 7]: [6] [7] [8] (sorted)
+	3.	Final Sorted Array: [1, 2, 3, 5, 6, 7, 
+⸻
+
+QuickSort Code in Python
+def quicksort(arr):
+    if len(arr) <= 1:
+        return arr  # Base case
+
+    pivot = arr[-1]  # Choosing last element as pivot
+    left = [x for x in arr[:-1] if x <= pivot]  # Elements <= pivot
+    right = [x for x in arr[:-1] if x > pivot]  # Elements > pivot
+
+    return quicksort(left) + [pivot] + quicksort(right)  # Recursively sort and combine
+
+# Example
+arr = [8, 3, 6, 1, 7, 2, 5]
+print(quicksort(arr))
+
+Time Complexity Analysis
+	•	Best/Average Case: O(n log n) (When partitioning is balanced)
+	•	Worst Case: O(n²) (If always picking the smallest or largest element as pivot)
+
+⸻
+
+Why Use QuickSort?
+
+✅ Faster than Merge Sort in practice (due to in-place sorting)
+✅ Good for large datasets
+✅ Efficient for random or nearly sorted data
